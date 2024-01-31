@@ -1,5 +1,5 @@
 FROM php:8.3-apache
-LABEL maintainer="Ralf Michael"
+LABEL maintainer="Anthony Schreiter"
 RUN apt-get update -y && apt-get install -y wget sendmail libpng-dev libonig-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libxml2-dev libzip-dev
 
 RUN apt-get update && \
