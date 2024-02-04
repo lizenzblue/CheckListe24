@@ -20,7 +20,6 @@ export default function Page({ user }) {
   };
 
   const handleCreateButtonClick = () => {
-    // Fetch updated data immediately after creating a task
     axios
       .post("http://localhost:8002/api/getTasks", {
         userId: user.userId,
