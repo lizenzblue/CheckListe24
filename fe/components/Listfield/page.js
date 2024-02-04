@@ -42,8 +42,11 @@ export default function Page({ user }) {
   }, [user.tasks]);
 
   return (
-    <div className="flex items-center justify-center h-screen font-InterFont mx-auto">
-      <div className="bg-white p-2 shadow-lg rounded-lg overflow-hidden max-w-md ">
+    <div
+      style={{ height: "600px", width: "600px" }}
+      className="flex items-center justify-center h-screen w-screen font-InterFont mx-auto mt-8"
+    >
+      <div className="bg-white p-2 shadow-lg rounded-lg overflow-hidden max-w-md">
         <div className="px-4 py-2">
           <h1 className="text-gray-800 pt-3 pl-3 font-bold text-2xl uppercase">
             To-Do List
