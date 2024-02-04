@@ -46,6 +46,9 @@ security:
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
     - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
     - { path: ^/api/register, roles: PUBLIC_ACCESS }
+    - { path: ^/api/getUsersForForm, roles: ROLE_USER }
+    - { path: ^/api/getUserAccount, roles: ROLE_USER }
+    - { path: ^/api/createTask, roles: ROLE_USER }
 
 when@test:
   security:

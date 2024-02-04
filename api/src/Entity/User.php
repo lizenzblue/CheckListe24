@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,6 +21,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    
+    #[ORM\ManyToMany(targetEntity: Task::class, mappedBy: 'users', cascade: ['persist'])]
+    private Collection $tasks;
 
     #[ORM\Column]
     private array $roles = [];
@@ -55,6 +60,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    public function createTask(string $title, string $description, string $status): Task
+    {
+        $task = new Task();
+        $task->setTitle($title)
+            ->setDescription($description)
+            ->setStatus($status);
+
+        $this->addTask($task);
+
+        return $task;
+    }
+
+    public function addTask(Task $task): static
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): static
+    {
+        $this->tasks->removeElement($task);
 
         return $this;
     }

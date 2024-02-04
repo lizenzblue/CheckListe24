@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const router = useRouter();
 
   const handleIsFocused = () => {
     setIsFocused(true);
@@ -25,7 +27,7 @@ const RegisterForm = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data.message);
+        router.push("/login");
       })
       .catch((err) => {
         console.log(err);
