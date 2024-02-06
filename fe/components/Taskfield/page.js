@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditTaskModal from "../EditTaskModal/page";
-import axios from "axios"; // Import axios if not already done
+import axios from "axios";
 
 export default function Page({
   task,
