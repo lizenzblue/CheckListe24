@@ -86,7 +86,7 @@ export default function Page({ user }) {
         </div>
         <div className="mt-1 mb-2"></div>
         {tasks && tasks.length > 0 && (
-          <div className="overflow-auto ml-2 mb-3 max-h-[31rem] flex">
+          <div className="overflow-auto ml-2 mb-3 mr-2 max-h-[31rem] flex">
             {" "}
             <ul className="bg-white shadow sm:rounded-md w-full mt-2">
               {tasks.map((task, index) =>

@@ -25,6 +25,7 @@ export default function Page({
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
   const removeLoggedInUser = (response) => {
+    console.log(response.users);
     for (let i = 0; i < response.users.length; i++) {
       if (response.users[i].id === userId) {
         response.users.splice(i, 1);
@@ -37,7 +38,7 @@ export default function Page({
     axios
       .get("http://localhost:8002/api/getUsersForForm")
       .then((response) => {
-        setUsers(removeLoggedInUser(response.data));
+        setUsers(response.data.users);
       })
       .catch((err) => console.log(err));
   }, [userId]);

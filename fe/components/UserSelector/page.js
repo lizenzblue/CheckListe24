@@ -50,10 +50,21 @@ export default function Page({
     removeUser(userId);
   };
 
-  const filteredOptions =
-    options?.users?.filter(
-      (option) => !selectedUsers.find((user) => user.id === option.id)
-    ) || [];
+  const filterUsers = () => {
+    for (let i = 0; i < options.length; i++) {
+      for (let j = 0; j < selectedUsers.length; j++) {
+        if (options[i].id === selectedUsers[j].id) {
+          options.splice(i, 1);
+        }
+      }
+      if (options[i].id === userId) {
+        options.splice(i, 1);
+      }
+    }
+    return options;
+  };
+
+  const filteredOptions = filterUsers();
 
   return (
     <div
