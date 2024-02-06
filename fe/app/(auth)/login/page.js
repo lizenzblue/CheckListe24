@@ -43,6 +43,14 @@ const LoginForm = () => {
         <button onClick={login} className="w-full border p-2 rounded mb-4">
           Login
         </button>
+        <div className="flex justify-center">
+          <a
+            href="/register"
+            className="font-InterFont text-[#304dff] hover:text-indigo-500 cursor-pointer mr-4"
+          >
+            Register
+          </a>
+        </div>
       </div>
     </div>
   );

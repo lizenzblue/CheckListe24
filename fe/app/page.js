@@ -41,9 +41,10 @@ export default function Home() {
 
   return (
     <>
-      <Navbar appName="Checkliste24" username={user.username} />
-      <br />
-      <Listfield user={user} />
+      <div className="overflow-hidden">
+        <Navbar appName="Checkliste24" username={user.username} />
+        <Listfield user={user} />
+      </div>
     </>
   );
 }

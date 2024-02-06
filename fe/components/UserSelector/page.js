@@ -6,10 +6,17 @@ export default function Page({
   handleUserSelect,
   removeUser,
   userId,
+  selectedUsersInsert,
 }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedUsersInsert) {
+      setSelectedUsers(selectedUsersInsert);
+    }
+  }, [selectedUsersInsert]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

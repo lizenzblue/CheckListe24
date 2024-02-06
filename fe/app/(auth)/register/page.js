@@ -37,7 +37,7 @@ const RegisterForm = () => {
   return (
     <div className="bg-[#F8F8F8] flex items-center justify-center h-screen">
       <div className=" form p-8 rounded-lg shadow-md max-w-md w-full mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
+        <h1 className="text-2xl mb-4 text-center">Register</h1>
         <input
           type="text"
           placeholder="Username"
@@ -59,6 +59,14 @@ const RegisterForm = () => {
         <button onClick={register} className="w-full border p-2 rounded mb-4">
           Register
         </button>
+        <div className="flex justify-center">
+          <a
+            href="/login"
+            className="font-InterFont text-[#304dff] hover:text-indigo-500 cursor-pointer mr-4"
+          >
+            Login
+          </a>
+        </div>
       </div>
     </div>
   );

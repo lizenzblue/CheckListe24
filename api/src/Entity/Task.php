@@ -74,6 +74,13 @@ class Task
         return $this;
     }
 
+    public function removeAllUsers(): static
+    {
+        $this->users->clear();
+
+        return $this;
+    }
+
     public function setUsers(Collection $users): static
     {
         $this->users = $users;

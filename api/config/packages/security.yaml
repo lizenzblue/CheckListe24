@@ -49,6 +49,9 @@ security:
     - { path: ^/api/getUsersForForm, roles: ROLE_USER }
     - { path: ^/api/getUserAccount, roles: ROLE_USER }
     - { path: ^/api/createTask, roles: ROLE_USER }
+    - { path: ^/api/updateTask, roles: ROLE_USER }
+    - { path: ^/api/deleteTask, roles: ROLE_USER }
+    - { path: ^/api/markTaskAsDone, roles: ROLE_USER }
 
 when@test:
   security:

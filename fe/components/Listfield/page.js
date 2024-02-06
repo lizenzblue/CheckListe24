@@ -7,21 +7,13 @@ export default function Page({ user }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  useEffect(() => {
+    getTasks();
+  }, []);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const updateTasks = (newTask) => {
-    setTasks([...tasks, newTask]);
-  };
-
-  const handleCreateButtonClick = () => {
+  const getTasks = () => {
     axios
-      .post("http://localhost:8002/api/getTasks", {
+      .post("http://localhost:8002/api/getTaskUpdates", {
         userId: user.userId,
       })
       .then((res) => {
@@ -30,6 +22,44 @@ export default function Page({ user }) {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const moveTaskUp = (index) => {
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  };
+
+  const moveTaskDown = (index) => {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  };
+
+  const updateTasks = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
+  const handleSubmitButtonClick = () => {
+    getTasks();
   };
 
   useEffect(() => {
@@ -41,33 +71,39 @@ export default function Page({ user }) {
   }, [user.tasks]);
 
   return (
-    <div
-      style={{ height: "600px", width: "600px" }}
-      className="flex items-center justify-center h-screen w-screen font-InterFont mx-auto mt-8"
-    >
-      <div className="bg-white p-2 shadow-lg rounded-lg overflow-hidden max-w-md">
-        <div className="px-4 py-2">
-          <h1 className="text-gray-800 pt-3 pl-3 font-bold text-2xl uppercase">
-            To-Do List
-          </h1>
-        </div>
-        <form className="w-full max-w-sm mx-auto px-4 py-2">
-          <div className="flex items-center border-b-2 border-[#304dff] py-2">
+    <div className="flex items-center justify-center font-InterFont mx-auto h-screen">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-screen-3xl ">
+        <div className="flex items-center justify-between border-b-4 border-[#304dff] py-2">
+          <form className="max-w-lg mx-1 ">
             <button
-              className="flex-shrink-0 bg-[#304dff] hover:bg-[#5a71ff] border-[#304dff] hover:border-[#5a71ff] text-sm border-4 text-white py-1 px-2 rounded"
+              className="flex-shrink-0 text-xl bg-[#304dff] hover:bg-[#5a71ff] border-[#304dff] hover:border-[#5a71ff] border-2 text-white px-2 rounded cursor-pointer items-right"
               type="button"
               onClick={openModal}
             >
-              Add
+              +
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
+        <div className="mt-1 mb-2"></div>
         {tasks && tasks.length > 0 && (
-          <div className="overflow-auto max-h-60">
-            <ul className="bg-white shadow sm:rounded-md max-w-sm mx-auto mt-4">
-              {tasks.map((task) => (
-                <Taskfield key={task.id} task={task} />
-              ))}
+          <div className="overflow-auto ml-2 mb-3 max-h-[31rem] flex">
+            {" "}
+            <ul className="bg-white shadow sm:rounded-md w-full mt-2">
+              {tasks.map((task, index) =>
+                task && task.id ? (
+                  <Taskfield
+                    key={task.id}
+                    task={task}
+                    userId={user.userId}
+                    updateTasks={updateTasks}
+                    onEditButtonClick={handleSubmitButtonClick}
+                    onMoveUp={() => moveTaskUp(index)}
+                    onMoveDown={() => moveTaskDown(index)}
+                  />
+                ) : (
+                  console.log("Task not found")
+                )
+              )}
             </ul>
           </div>
         )}
@@ -77,7 +113,7 @@ export default function Page({ user }) {
           closeModal={closeModal}
           userId={user.userId}
           updateTasks={updateTasks}
-          onCreateButtonClick={handleCreateButtonClick}
+          onCreateButtonClick={handleSubmitButtonClick}
         />
       )}
     </div>

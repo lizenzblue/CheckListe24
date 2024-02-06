@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Page({ chooseWhat, options, handleStatusChange }) {
+export default function Page({
+  chooseWhat,
+  options,
+  handleStatusChange,
+  insertSelectedUStaus,
+}) {
   const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  useEffect(() => {
+    if (insertSelectedUStaus) {
+      setSelectedOption(insertSelectedUStaus);
+    }
+  }, [insertSelectedUStaus]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
