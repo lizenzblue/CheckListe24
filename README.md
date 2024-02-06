@@ -12,7 +12,7 @@ Follow these steps to set up and run the project seamlessly.
    ```
 4. Execute the Docker container named `php-apache`:
    ```bash
-   docker exec -it php-apache bash
+    docker exec -it api-php-apache-1 
    ```
 5. Inside the container, run the following commands:
    ```bash
