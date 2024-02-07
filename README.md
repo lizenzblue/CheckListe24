@@ -10,7 +10,7 @@ Follow these steps to set up and run the project seamlessly.
    ```bash
    docker-compose build
    ```
-4. Execute the Docker container named `php-apache`:
+4. Execute the Docker container named `api-php-apache-1`:
    ```bash
     docker exec -it api-php-apache-1 
    ```
